@@ -22,6 +22,10 @@ class deletingNodeWithoutUsingHead{
 
 		Node temp = del;
 
+	
+		/*
+		//1)APPROACH - If node that is to be deleted is not the 2nd last node.otherwise for this case it will fail.
+	
 		//until (temp and temp.next) != null, update the value of temp node with that of temp.next
 		while(temp != null && temp.next != null){	
 				
@@ -36,18 +40,33 @@ class deletingNodeWithoutUsingHead{
 				break;
 			}
 
-			/*	
-			temp.data = temp.next.data;	//updated the temp node with its next node.
+				
+			//temp.data = temp.next.data;	//updated the temp node with its next node.
 			//temp.next = null;
-			temp = temp.next;		//updating the position of temp to next.
-			*/
-		}
-
-		/*
-		if(temp.next == null){
-			temp = null;
+			//temp = temp.next;		//updating the position of temp to next.
+			
 		}
 		*/
+		
+
+		//2nd APPROACH , directly updating the current node with next node value.AND then making it point to next of next node.
+		
+		//Update the current node
+		temp.data = temp.next.data;
+
+		//making current node point to next of next node (removal of desired node from list.) 
+		temp.next = temp.next.next;
+
+		//2->3->4->5
+		//remove 3
+		//RESULT : 2->4->5
+
+		//with the helps of update statement i.e temp.data = temp.next.data, list becomes
+		//2->4->4->5
+		//here temp is still present on second node.
+		//using statement : temp.next = temp.next.next; list becomes.
+		//2->4->5
+
 
 	}
 }
