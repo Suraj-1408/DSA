@@ -17,33 +17,52 @@ class sortBasedOnOtherArray{
 			map.add(i,nums[i]);	//index,value.
 		}	
 */		
+		//int[] nums1 = {2,1,2,5,7,1,9,3,6,8,8};
 		int pos = 0;
 
 		for(int i = 0;i < nums1.length;i++){
-			int val = getValue(index,nums2);
-			
-			if(nums1[i] == val){
+
+			int val = getValue(index,nums2);	
+			int count = getCount(pos,val,nums1);
+
+			while(count > 0){
+
+			if(nums1[pos] == val){
 				pos++;
-				continue;
+				count--;
+				//System.out.println(nums1[i]);
+				//break;
 			}
 		
+			//else if(nums1[i] != val){
 			else{
-				for(int j = i+1;j < nums1.length;j++){
+				for(int j = pos+1;j < nums1.length;j++){
 				
 				if(nums1[j] == val){
-					int temp = nums1[i];
-					nums1[i] = nums1[j];
+					int temp = nums1[pos];
+					nums1[pos] = nums1[j];
 					nums1[j] = temp;
 						
 					pos++;
+					count--;
+					break;
 					}
 				}
+				//System.out.println(nums1[i]);	
+				//count = 0;
 			}
+			
+			}
+
+			if(count == 0){
 			index++;
+			}
 		}
+		
 		
 		System.out.println("Index Reached:"+pos);
 
+	
 		for(int i = pos;i < nums1.length;i++){
 			
 			for(int j = i+1;j < nums1.length;j++){
@@ -54,7 +73,8 @@ class sortBasedOnOtherArray{
 				}
 			}
 		}
-
+		
+	
 	}
 
 	public static int getValue(int index,int[] nums2){
@@ -64,6 +84,19 @@ class sortBasedOnOtherArray{
 		}
 		
 		return 0;
+	}
+
+	public static int getCount(int index,int val,int[] nums1){
+		//int val = getValue(index,nums1);
+		
+		int count = 0;
+		for(int j = index;j < nums1.length;j++){
+			if(nums1[j] == val){
+				count++;
+			}
+		}
+
+		return count;
 	}
 	
 
@@ -80,12 +113,11 @@ class sortBasedOnOtherArray{
 	//main
 	public static void main(String[] args){
 		
-		int[] nums1 = {2,1,2,5,7,1,9,3,6,8};
+		int[] nums1 = {2,1,2,5,7,1,9,3,6,8,8};
 		int[] nums2 = {2,1,8,3};
 
 		list("Nums1:",nums1);
 		list("Nums2:",nums2);
-
 
 		sort(nums1,nums2);
 
